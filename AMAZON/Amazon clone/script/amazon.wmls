@@ -1,0 +1,244 @@
+package amazon;
+/******************************************************************************/
+
+use url PhASTError "package://phast#utils/error.wmlsc";
+use url RT         "package://phast#utils/runtime.wmlsc";
+
+/******************************************************************************/
+extern function MODULE_NAME()    { return "AMAZON"; }
+extern function MODULE_VERSION() { return PhType.set(PhType.create(PhType.VERSION), "1.0.0.0"); }
+extern function MODULE_ID()      { return 0x00; }
+
+/******************************************************************************/
+/* Função de entrada caso applet seja usado junto com módulo PayStore
+ * Se instalado, é executada ao clicar no applet na store
+ */
+extern function start()
+{
+}
+
+/******************************************************************************/
+/* Primeira função executada do applet ao iniciar o sistema, junto
+ * dos demais applets na VM, seguindo ordem de inicialização
+ * @param applet Map com registro o applet
+ * {
+ * AppletMngr#G_APPLETS_REG_ATT_ACTIVE():boolean;
+ * AppletMngr#G_APPLETS_REG_ATT_SCRIPT():string;
+ * AppletMngr#G_APPLETS_REG_ATT_VERSION():PhType.VERSION;
+ * AppletMngr#G_APPLETS_REG_ATT_PORT():INTEGER;
+ * [MAP COM CONFIG ESPECIFICOS]
+ * }
+ * @return true, false ou invalid 
+ */ 
+extern function init(applet)
+{
+  var result      = false;
+  var runtimeData = RT#getRuntimeData();
+
+  result = PhASTError#addErrorsToContext("package://amazon#i18n/errors.wmlsc");
+
+  return result;
+}
+
+/******************************************************************************/
+/* Função chamada ao término de execução da VM, junto
+ * dos demais applets na VM, seguindo ordem de inicialização
+ */
+extern function term()
+{
+}
+
+/******************************************************************************/
+/* Função chamada no main da VM quando estado da aplicação se encontra em #ST_NOT_CONFIGURED, 
+ * junto dos demais applets na VM, seguindo ordem de inicialização
+ * @return invalid, true ou false
+ */
+extern function setup()
+{
+}
+
+/******************************************************************************/
+/* Reset para inicialização das configurações do applet para inicialização, 
+ * junto dos demais applets na VM, seguindo ordem de inicialização
+ * @param datalist PhType.STRUCT contendo informação para o servidor
+ * @return true, false ou invalid 
+ */
+extern function resetInitCfg(dataList)
+{
+  return true;
+}
+
+/******************************************************************************/
+/* Reset para inicialização das configurações específicas internas do applet, 
+ * junto dos demais applets na VM, seguindo ordem de inicialização
+ * @param datalist PhType.STRUCT contendo informação para o servidor
+ * @return true, false ou invalid 
+ */
+extern function resetSpecCfg(dataList)
+{
+  return true;
+}
+
+/******************************************************************************/
+/* Função chamada no main da VM após as chamadas de main dos applets, juntamente
+ * com presentation da VM, junto dos demais applets na VM, seguindo ordem de inicialização
+ * @return invalid, true ou false
+ */
+extern function outset()
+{
+  return true;
+}
+
+/******************************************************************************/
+/* Função chamada no primeiro draw da tela de Idle, junto dos demais applets na VM, 
+ * seguindo ordem de inicialização
+ * @param title String com mensagem para título na tela de Idle (apenas para modo texto!)
+ * @param msg1 String com mensagem central da tela de Idle (JCSS key: idleMsg)
+ * @param msg2 String com mensagem para rodapé na tela de Idle (apenas para modo texto!)
+ */
+extern function showIdleScreen(title, msg1, msg2)
+{
+}
+
+/******************************************************************************/
+/* Função chamada no primeiro draw da tela de Idle, junto dos demais applets na VM, 
+ * seguindo ordem de inicialização
+ * @param progress Integer progresso interno com uso junto ao PHDM
+ * @param title String @ref showIdleScreen
+ * @param msg1 String @ref showIdleScreen
+ * @param msg2 String @ref showIdleScreen
+ */
+extern function refreshIdleScreen(progress, title, msg1, msg2)
+{
+}
+
+/******************************************************************************/
+/* Função chamada ao final do primeiro draw da tela de Idle, junto dos demais applets na VM, 
+ * seguindo ordem de inicialização
+ */
+extern function onIdle()
+{
+}
+
+/******************************************************************************/
+/* Função chamada ao final de cada refresh da tela de Idle, junto dos demais applets na VM, 
+ * seguindo ordem de inicialização
+ */
+extern function onIdleRefresh()
+{
+}
+
+/******************************************************************************/
+/* Função para adição de tecla de atalho para execução de script customizado, junto dos demais applets na VM, 
+ * seguindo ordem de inicialização
+ * @return invalid ou lista com sub listas conteno o formato de [LABEL, SHORTCUTKEY, SCRIPT]
+ * eg.: ["LABEL", PhKeyBoard.KEY_00, "package://amazon/script.wmlsc#functionname"];
+ */
+extern function addAppletToIdleScreen()
+{
+  return [];
+}
+
+/******************************************************************************/
+/* Função chamada ao final da inicialização da aplicação com servidor, junto 
+ * dos demais applets na VM, seguindo ordem de inicialização
+ * @param inicUpdated Bool indicando sucesso na extração dos arquivos da resposta da inicialização
+ * @return true, false
+ */
+extern function onCheckInstallation(inicUpdated)
+{
+  return true;
+}
+
+/******************************************************************************/
+/* Registra serviços para execução do applet ou de outros de forma pública através
+ * da chave passada para o registro no formato "STRINGCHAVE", SCRIPT, NOMEFUNCAO, NUMPARAMS
+ * @refs URL "package://phast#applet/service.wmlsc"
+ * eg.: AppletService#register("amazon.myservice", "package://amazon/myservices.wmlsc", "funcname", 1);
+ * As chamadas dos serviços são feitas AppletService#execute("STRINGCHAVE", [PARAM1, PARAM2,...])
+ */
+extern function publicServices()
+{
+}
+
+/******************************************************************************/
+/* Se o registro do applet contiver porta cadastrada para listen, ao receber conexão 
+ * o handle do socket stream é passado para a chamada da OnAcceptTCPConnection
+ * @param socket Stream do socket de conexão
+ */
+extern function OnAcceptTCPConnection(socket)
+{
+}
+
+/******************************************************************************/
+/* Função chamada quando estado da aplicação se encontra em #ST_LOCKED, 
+ * junto dos demais applets na VM, seguindo ordem de inicialização
+ */
+extern function unlock()
+{
+  return true;
+}
+
+/******************************************************************************/
+/* Função que recebe código de erro vindo da VM depois da exibição da tela de erro
+ * @param code Integer com código do erro passado
+ */
+extern function onError(code)
+{
+}
+
+/******************************************************************************/
+extern function getDataFileNames(list)
+{
+}
+
+/******************************************************************************/
+extern function getConfigFileNames(list)
+{
+}
+
+/******************************************************************************/
+extern function onEventStart(type)
+{
+}
+
+/******************************************************************************/
+extern function onEventFinish(type, result_)
+{
+}
+
+/******************************************************************************/
+extern function onLogin(login, online)
+{
+}
+
+/******************************************************************************/
+extern function onLogout()
+{
+}
+
+/******************************************************************************/
+extern function onShiftOpen(userId, shiftId)
+{
+}
+
+/******************************************************************************/
+extern function onShiftClose(userId, shiftId, date)
+{
+}
+
+/******************************************************************************/
+extern function onChipCardDetected(transactionId, appType)
+{
+}
+
+/******************************************************************************/
+extern function onMagCardDetected(transactionId)
+{
+}
+
+/******************************************************************************/
+extern function onManualCardDetected(transactionId)
+{
+}
+

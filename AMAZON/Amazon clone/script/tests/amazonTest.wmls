@@ -1,0 +1,17 @@
+package amazon#tests;
+
+/*
+O diretório "/client/script/tests" é reservado para implementação de testes unitários.
+Caso deseje ter um diretório diferente para armazenamento dos testes unitários, basta
+informar o diretório na propriedade "scriptsTestDirectory" do arquivo de configuração
+"/client/testConfig.properties".
+
+Execute seus testes unitários clicando com o botão direito sobre o arquivo de script ou diretório
+e acesse o menu de contexto "Run JslUnit Test". 
+Uma nova view será exibida com o resultado dos testes.
+
+*/
+
+extern function test() {
+  
+}
